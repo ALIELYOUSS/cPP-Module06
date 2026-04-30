@@ -115,7 +115,7 @@ bool parseLiteral(const std::string& literal, double& value, bool& isFloat)
 	return parseFloatingLiteral(literal, value);
 }
 
-} // namespace
+}
 
 void ScalarConverter::convert(const std::string& literal)
 {
