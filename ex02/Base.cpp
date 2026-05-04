@@ -1,19 +1,16 @@
 #include "Base.hpp"
-
-#include <cstdlib>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 Base::~Base() {}
 
 Base* generate(void)
 {
 	switch (std::rand() % 3) {
-		case 0:
-			return new A();
-		case 1:
-			return new B();
-		default:
-			return new C();
+		case 0: return new A();
+		case 1: return new B();
+		default: return new C();
 	}
 }
 
@@ -32,19 +29,15 @@ void identify(Base& p)
 	try {
 		(void)dynamic_cast<A&>(p);
 		std::cout << "A";
-		return;
-	} catch (...) {
 	}
-	try {
-		(void)dynamic_cast<B&>(p);
-		std::cout << "B";
-		return;
-	} catch (...) {
-	}
-	try {
-		(void)dynamic_cast<C&>(p);
-		std::cout << "C";
-		return;
-	} catch (...) {
+	catch(...) {
+		try {
+			(void)dynamic_cast<B&>(p);
+			std::cout << "B";
+		} 
+		catch (...) {
+			(void)dynamic_cast<C&>(p);
+			std::cout << "C";
+		}
 	}
 }
